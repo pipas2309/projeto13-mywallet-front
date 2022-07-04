@@ -6,7 +6,7 @@ import { ThreeDots } from "react-loader-spinner";
 
 //Contexts
 import TokenContext from "../../contexts/TokenContext";
-//import UserContext from "../../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 
 //Components
 import Header from "../Header";
@@ -14,7 +14,7 @@ import Footer from "../Footer";
 import Transaction from "../Transaction";
 
 //Media and CSS
-import { Container, Balance } from "./style";
+import { Container, Balance, TransactionS } from "./style";
 
 
 export default function Hoje () {
@@ -22,13 +22,15 @@ export default function Hoje () {
     const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
 
     //const { novaEntrada, setNovaEntrada } = useContext(UserContext);
+    const { user } = useContext(UserContext)
     const { token } = useContext(TokenContext);
-        console.log(token)
-        const config = {
+    
+    const config = {
         headers: {
             "Authorization": `Bearer ${token}`
         }
     }
+    
     const navigate = useNavigate()
     const [minhasTransacoes, setMinhasTransacoes] = useState();
     const [balance, setBalance] = useState();
@@ -56,8 +58,7 @@ export default function Hoje () {
         });
 
     },[])
-    
-    
+        
     /* função de clicar
     function clica(index) {
 
@@ -92,7 +93,7 @@ export default function Hoje () {
                 );
             }
             return (
-                minhasTransacoes.map((value, index) => <Transaction 
+                minhasTransacoes.map((value) => <Transaction 
                 key={value._id}
                 amount={value.amount}
                 description={value.description}
@@ -115,10 +116,10 @@ export default function Hoje () {
         <>
             <Container>
                 <Header />
-                <Transaction>
+                <TransactionS>
                     {listaTransacoes}
                     <Balance>SALDO <p>{balance}</p></Balance>
-                </Transaction>
+                </TransactionS>
                 <Footer />
             </Container>            
         </>

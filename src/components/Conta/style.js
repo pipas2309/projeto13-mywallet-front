@@ -3,12 +3,12 @@ import styled from "styled-components";
 const Container = styled.div`
     width: 100%;
     height: 100%;
-    min-height: 100vmax;
+    min-height: 100vh;
     padding: 78px 25px 143px 25px;
     background-color: #8C11BE;
 
     p {
-        color: #868686;
+        color: #fff;
     }
     
     span {
@@ -23,7 +23,7 @@ const Balance = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px 10px 15px;
+    padding: 0 0px 10px 0px;
 
     p {
         color: #03AC00;
@@ -32,16 +32,20 @@ const Balance = styled.div`
     }
 `;
 
-const Transaction = styled.div`
+const TransactionS = styled.div`
+    width: 100%;
+    height: 100%;
+    min-height: calc(100vh - 230px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #fff;
     border-radius: 5px;
-    padding: 78px 25px 143px 25px;
-    background-color: #8C11BE;
+    padding: 10px 25px 10px 25px;
 `;
-
 
 export {
     Container,
     Balance,
-    Transaction
+    TransactionS
 };

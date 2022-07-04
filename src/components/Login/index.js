@@ -1,6 +1,6 @@
 //Libs
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 
@@ -26,6 +26,8 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [carregando, setCarregando] = useState(false);
+    const [pegaToken, setPegaToken] = useState(false);
+    const [usuario, setUsuario] = useState({});
     
     //FUNÇÕES
     const userLocal = local();
@@ -52,25 +54,51 @@ export default function Login() {
     //FUNCÇÃO QUANDO DER 'SUBMIT' NO FORMULÁRIO
     function logar (e) {
         e.preventDefault();
-        const usuario = {
+        const xxx = {
             email,
             password
         };
-
-        const promise = axios.post(URL_API_LOGIN, usuario);
+        setUsuario(xxx)
+        setPegaToken(true); /*
+        const promise = await axios.post(URL_API_LOGIN, usuario);
+        
+        const feito = promise.data
+        if(feito.token) {
+            setPegaToken(true);
+        }
+        navigate('/conta');
+        setUser(feito)
+        
         promise.then((resp) => {
+            navigate('/conta');
             local(true,usuario);
             setToken(resp.data.token);
             setUser(resp.data);
-            navigate('/conta');
+            
             
         })
         promise.catch((resp) => {
             alert(resp.response.data.message)
             setCarregando(false)
-        })
+        })*/
     };
     
+    //final
+    useEffect(() => {    
+        console.log('entrei no pega logo')
+
+        const promise = axios.post(URL_API_LOGIN, usuario);
+        promise.then((resp) => {
+            navigate('/conta');
+            local(true,usuario);
+            
+            setUser(resp.data);
+            setToken(resp.data.token);
+            
+        })
+    },[pegaToken])
+
+
     //RENDER
     return (
         <Container>
