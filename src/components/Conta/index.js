@@ -23,10 +23,10 @@ export default function Hoje () {
 
     //const { novaEntrada, setNovaEntrada } = useContext(UserContext);
     const { token } = useContext(TokenContext);
-        console.log(token.toString())
+        console.log(token)
         const config = {
         headers: {
-            "Authorization": `Bearer ${token.toString()}`
+            "Authorization": `Bearer ${token}`
         }
     }
     const navigate = useNavigate()

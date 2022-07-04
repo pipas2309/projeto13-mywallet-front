@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #8C11BE;
-    margin: calc(50px + 5%) 0 0 0;
+    
     
     
     form {
@@ -21,7 +21,7 @@ const Container = styled.div`
     p {
         font-size: 14px;
         line-height: 17px;
-        color: #000000;
+        color: #fff;
         text-decoration: underline;
         text-align: center;
     }
