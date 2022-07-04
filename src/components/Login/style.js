@@ -8,7 +8,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #8C11BE;
-    
+    padding-bottom: 150px;
     
     
     form {
@@ -43,7 +43,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-    width: 303px;
+    width: 326px;
     height: 45px;
     margin-bottom: 25px;
     color: #fff;
@@ -58,7 +58,7 @@ const Button = styled.button`
 
     &:active {
         font-size: 25px;
-        background-color: #38aafd;
+        background-color: #A328D6;
     }
 `;
 

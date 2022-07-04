@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #8C11BE;
-    margin: calc(50px + 5%) auto 0 auto;
+    padding-bottom: 100px;
 
     form {
         width: 326px;
@@ -42,7 +42,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-    width: 303px;
+    width: 326px;
     height: 45px;
     margin-bottom: 25px;
     display: flex;
@@ -57,7 +57,7 @@ const Button = styled.button`
 
     &:hover {
         font-size: 25px;
-        background-color: #38aafd;
+        background-color: #A328D6;
     }
 `;
 
