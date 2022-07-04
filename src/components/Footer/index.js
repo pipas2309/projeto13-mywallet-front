@@ -7,8 +7,8 @@ import UserContext from "../../contexts/UserContext";
 
 //Media and CSS
 import { Container, Image, SideButton } from "./style";
-import plus from '../../media/plus.css';
-import minus from '../../media/minus.css';
+import plus from '../../media/plus.png';
+import minus from '../../media/minus.png';
 
 
 export default function Footer () {

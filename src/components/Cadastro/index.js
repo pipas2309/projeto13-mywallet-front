@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+//import { ToastContainer, toast } from 'react-toastify';
+//import 'react-toastify/dist/react-toastify.css';
 
 //Media e CSS
 import { Button, Container, Input, Title } from "./style";
@@ -16,7 +16,16 @@ export default function Cadastro() {
     const navigate = useNavigate();
     const [carregando, setCarregando] = useState(false);
 
-    const notify = () => toast("As senhas precisam ser iguais!")
+    /* Toasty
+    const notify = () => toast('As Senhas Precisam ser Iguais!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        }); */
 
     function cadastrar(e) {
         const username = e.target[0].value;
@@ -26,9 +35,11 @@ export default function Cadastro() {
 
         if(password !== checkPassword) {
             setCarregando(false)
-            notify();
+            //notify();
             return;
         }
+
+
 
         const usuario = {
             username,
@@ -50,7 +61,7 @@ export default function Cadastro() {
     return (
         <Container>
             <Title>MyWallet</Title>
-            <ToastContainer
+            {/* <ToastContainer
                 position="top-center"
                 autoClose={3000}
                 hideProgressBar={false}
@@ -60,7 +71,7 @@ export default function Cadastro() {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-            />
+            /> */}
             <form onSubmit={(e) => {
                 e.preventDefault(cadastrar(e));
                 setCarregando(true)

@@ -1,44 +1,58 @@
 //Libs
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import 'dayjs/locale/pt-br';
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
-import dayjs from "dayjs";
 
 //Contexts
 import TokenContext from "../../contexts/TokenContext";
-import UserContext from "../../contexts/UserContext";
+//import UserContext from "../../contexts/UserContext";
 
 //Components
 import Header from "../Header";
 import Footer from "../Footer";
-import Habito from "../Habito";
+import Transaction from "../Transaction";
 
 //Media and CSS
-import { Container, NavTitle } from "./style";
+import { Container, Balance } from "./style";
 
 
 export default function Hoje () {
     const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
-    const { percentage, setPercentage } = useContext(UserContext);
+    const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
+
+    //const { novaEntrada, setNovaEntrada } = useContext(UserContext);
     const { token } = useContext(TokenContext);
+        console.log(token.toString())
         const config = {
         headers: {
-            "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${token.toString()}`
         }
     }
     const navigate = useNavigate()
-    const [meusHabitos, setMeusHabitos] = useState();
+    const [minhasTransacoes, setMinhasTransacoes] = useState();
+    const [balance, setBalance] = useState();
 
     useEffect(() => {
         const promise = axios.get(URL_API_ALL_TRANSACTIONS, config);
         promise.then(({data}) => {
-            setMeusHabitos(data);
-            contaProgresso(data);
+            console.log(data, 'tra')
+            setMinhasTransacoes(data);
         });
         promise.catch((resp) => {
-            navigate('/');
+            //navigate('/');
+        });
+
+    },[])
+
+    useEffect(() => {
+        const promise = axios.get(URL_API_BALANCE, config);
+        promise.then(({data}) => {
+            console.log(data.balance, 'balance')
+            setBalance(data.balance);
+        });
+        promise.catch((resp) => {
+            //navigate('/');
         });
 
     },[])
@@ -70,32 +84,19 @@ export default function Hoje () {
         setMeusHabitos(atualizando);
     } */
 
-
-    function contaProgresso(habitos) {
-        const habitosConcluidos = habitos.filter((value) => value.done === true).length;
-        const progresso = Math.ceil((habitosConcluidos / habitos.length) * 100);
-        if(isNaN(progresso)) {
-            setPercentage(0)
-            return;
-        }
-        setPercentage(progresso);
-    }   
-
-    function tenhoHabitos() {
-        if(meusHabitos) {
-            if(meusHabitos.length === 0) {
+    function tenhoTransacoes() {
+        if(minhasTransacoes) {
+            if(minhasTransacoes.length === 0) {
                 return (
-                    <p>Você não tem nenhum hábito cadastrado para a {aux2}. <br />
-                    Crie um hábito para fazer hoje e comece a trackear!
-                    </p>
+                    <p>Não há registros de entrada ou saída</p>
                 );
             }
             return (
-                meusHabitos.map((value, index) => <Habito 
-                key={value.id}
-                habito={value}
-                index={index}
-                clica={clica}
+                minhasTransacoes.map((value, index) => <Transaction 
+                key={value._id}
+                amount={value.amount}
+                description={value.description}
+                data={value.data}
                 />)
             )
             ;
@@ -107,35 +108,19 @@ export default function Hoje () {
             );
         }
     }
-    
-    function porcentagem() {
-        if(percentage === 0 || isNaN(percentage)) {
-            return (<p>Nenhum hábito concluído ainda</p>)
-        } else {
-            return (<p>{percentage}% dos hábitos concluídos</p>)
-        }
-    }
-
-    const aux = dayjs().locale('pt-br').format('dddd, DD/MM');
-    const aux2 = dayjs().locale('pt-br').format('dddd');
-    const day = aux.charAt(0).toUpperCase() + aux.slice(1);
-    
-    const listaHabitos = tenhoHabitos();
-    const minhaPorcentagem = porcentagem();
+        
+    const listaTransacoes = tenhoTransacoes();
 
     return (
         <>
-            
             <Container>
                 <Header />
-                <NavTitle percentage={percentage}>
-                    <h3>{day}</h3>
-                    {minhaPorcentagem}
-                </NavTitle>
-                {listaHabitos}
+                <Transaction>
+                    {listaTransacoes}
+                    <Balance>SALDO <p>{balance}</p></Balance>
+                </Transaction>
                 <Footer />
-            </Container>
-            
+            </Container>            
         </>
     );
 }

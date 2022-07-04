@@ -15,7 +15,13 @@ const Container = styled.div`
 
 const Image = styled.img`
     color: #fff;
-    font-size: 15px;
+    width: 30px;
+    height: auto;
+    margin-bottom: 30px;
+    filter: contrast(100%);
+    filter: grayscale(000%);
+    filter: saturate(300%);
+    filter: brightness(1.25);
 `;
 
 const SideButton = styled.div`
