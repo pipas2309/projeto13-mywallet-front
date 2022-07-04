@@ -1,41 +1,38 @@
 //Libs
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 //Contexts
 import UserContext from "../../contexts/UserContext";
 
 //Media and CSS
-import { Container, MiddleButton, SideButton } from "./style";
-import 'react-circular-progressbar/dist/styles.css'
+import { Container, Image, SideButton } from "./style";
+import plus from '../../media/plus.css';
+import minus from '../../media/minus.css';
+
 
 export default function Footer () {
-    const { percentage } = useContext(UserContext);
+    const { setNovaEntrada } = useContext(UserContext);
 
     const navigate = useNavigate()
 
     return (
         <Container>
 
-            <SideButton onClick={() => navigate('/habitos')}><p>Hábitos</p></SideButton>
-            <MiddleButton onClick={() => navigate('/hoje')}>
-                <CircularProgressbar
-                    value={percentage}
-                    text="Hoje"
-                    background
-                    strokeWidth="8"
-                    backgroundPadding={6}
-                    styles={buildStyles({
-                        backgroundColor: "#3e98c7",
-                        textColor: "#fff",
-                        pathColor: "#fff",
-                        trailColor: "transparent",
-                        width: "20px"
-                    })}
-                />
-            </MiddleButton>
-            <SideButton onClick={() => navigate('/historico')}><p>Histórico</p></SideButton>
+            <SideButton onClick={() => {
+                setNovaEntrada('plus');
+                navigate('/nova-movimentacao');
+                }}>
+                <Image src={plus} alt="Credito" />
+                <p>Nova entrada</p>
+            </SideButton>
+            <SideButton onClick={() => {
+                setNovaEntrada('minus');
+                navigate('/nova-movimentacao');
+                }}>
+                <Image src={minus} alt="Debito" />
+                <p>Nova saída</p>
+            </SideButton>
         </Container>
     );
 }

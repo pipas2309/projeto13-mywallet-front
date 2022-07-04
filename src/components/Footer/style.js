@@ -2,12 +2,10 @@ import styled from "styled-components";
 
 const Container = styled.div`
     width: 100%;
-    height: 70px;
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-    padding: 0 18px;
+    height: 143px;
+    padding: 0 25px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     bottom: 0;
@@ -15,33 +13,32 @@ const Container = styled.div`
     z-index: 1;
 `;
 
-const MiddleButton = styled.div`
-    background-color: #52b6ff;
-    width: 91px;
-    height: 91px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 42px;
-
-    p {
-        color: #fff;
-        font-size: 18px;
-        line-height: 22px;
-    }
+const Image = styled.img`
+    color: #fff;
+    font-size: 15px;
 `;
 
 const SideButton = styled.div`
+    background-color: #A328D6;
+    border-radius: 5px;
+    padding: 10px;
+    width: 155px;
+    height: 114px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
     p {
-        color: #52b6ff;
-        font-size: 18px;
-        line-height: 22px;
+        color: #fff;
+        font-size: 17px;
+        line-height: 20px;
+        word-break: break-all;
+        text-overflow: ellipsis;
     }
 `;
 
 export {
     Container,
-    MiddleButton,
+    Image,
     SideButton
 }

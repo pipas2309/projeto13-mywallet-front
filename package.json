@@ -22,7 +22,8 @@
   "eslintConfig": {
     "extends": [
       "react-app"
-    ]
+    ],
+    "rules": {"no-restricted-globals": ["error", "event", "fdescribe"]}
   },
   "browserslist": {
     "production": [

@@ -2,10 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
     width: 100%;
-    height: 70px;
-    background-color: #126BA5;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-    padding: 0 18px;
+    height: 78px;
+    padding: 0 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

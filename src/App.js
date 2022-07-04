@@ -18,12 +18,12 @@ function App() {
 
     const [token, setToken] = useState('');
     const [user, setUser] = useState({});
-    const [percentage, setPercentage] = useState(0);
+    const [novaEntrada, setNovaEntrada] = useState(0);
     const [transaction, setTransaction] = useState([]);
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>
-            <UserContext.Provider value={{ user, setUser, percentage, setPercentage }}>
+            <UserContext.Provider value={{ user, setUser, novaEntrada, setNovaEntrada }}>
                 <HabitsContext.Provider value={{ transaction, setTransaction }}>
                     <GlobalStyle />
                     <BrowserRouter>
