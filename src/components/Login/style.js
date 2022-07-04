@@ -65,7 +65,7 @@ const Button = styled.button`
 const Title = styled.h1`
     font-family: 'Saira Stencil One', cursive;
     font-size: 32px;
-    color: #FFFFFF;
+    color: #FFF;
     line-height: 50px;
 `;
 

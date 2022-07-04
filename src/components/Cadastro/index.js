@@ -12,7 +12,7 @@ import { Button, Container, Input, Title } from "./style";
 export default function Cadastro() {
     
 
-    const URL_CADASTRO_API = "https://my-wallet-backend-p13.herokuapp.com/auth/sign-up"
+    const URL_CADASTRO_API = "https://my-wallet-backend-p13.herokuapp.com/auth/sign-up";
     const navigate = useNavigate();
     const [carregando, setCarregando] = useState(false);
 
@@ -44,9 +44,7 @@ export default function Cadastro() {
         promise.catch((e) => {
             alert(`${e.response.data.message}\n${e.response.data.details}`);
             setCarregando(false)
-        })
-        
-
+        });
     }
 
     return (

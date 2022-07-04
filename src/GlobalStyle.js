@@ -33,7 +33,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
     font-weight: 400;
 }
 ol, ul {

@@ -51,7 +51,7 @@ const Button = styled.button`
     color: #fff;
     font-size: 20px;
     background-color: #A328D6;
-    border-radius: 4px;
+    border-radius: 5px;
     border: none;
     transition: 0.5s;
 
@@ -62,10 +62,10 @@ const Button = styled.button`
 `;
 
 const Title = styled.h1`
-    font-family: 'Playball', cursive;
-    font-size: 69px;
-    color: #126BA5;
-    line-height: 86px;
+    font-family: 'Saira Stencil One', cursive;
+    font-size: 32px;
+    color: #FFF;
+    line-height: 50px;
 `;
 
 
