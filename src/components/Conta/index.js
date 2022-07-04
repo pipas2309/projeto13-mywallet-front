@@ -20,7 +20,7 @@ import { Container, NavTitle } from "./style";
 
 
 export default function Hoje () {
-    const URL_API_LISTA_HABITOS_HOJE = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
+    const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
     const { percentage, setPercentage } = useContext(UserContext);
     const { token } = useContext(TokenContext);
         const config = {
@@ -32,7 +32,7 @@ export default function Hoje () {
     const [meusHabitos, setMeusHabitos] = useState();
 
     useEffect(() => {
-        const promise = axios.get(URL_API_LISTA_HABITOS_HOJE, config);
+        const promise = axios.get(URL_API_ALL_TRANSACTIONS, config);
         promise.then(({data}) => {
             setMeusHabitos(data);
             contaProgresso(data);
@@ -44,7 +44,7 @@ export default function Hoje () {
     },[])
     
     
-    //Logica check
+    /* função de clicar
     function clica(index) {
 
         const atualizando = [...meusHabitos];
@@ -68,7 +68,7 @@ export default function Hoje () {
 
         contaProgresso(atualizando);
         setMeusHabitos(atualizando);
-    }
+    } */
 
 
     function contaProgresso(habitos) {

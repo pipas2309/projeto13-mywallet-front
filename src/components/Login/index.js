@@ -43,7 +43,7 @@ export default function Login() {
             navigate('/conta');
         })
         //CASO O LOCAL STORAGE NÃO FUNCIONE
-        promise.catch((resp) => {
+        promise.catch(() => {
             localStorage.removeItem("user");
             setCarregando(false)
         })
@@ -74,7 +74,7 @@ export default function Login() {
     //RENDER
     return (
         <Container>
-            <Title>TrackIt</Title>
+            <Title>MyWallet</Title>
             <form onSubmit={(e) => {
                 logar(e);
                 setCarregando(true)

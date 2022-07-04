@@ -11,9 +11,8 @@ import HabitsContext from './contexts/TransationContext';
 //Components
 import Cadastro from './components/Cadastro';
 import Login from './components/Login';
-import Hoje from './components/Hoje';
+import Conta from './components/Conta';
 import Habitos from './components/Habitos';
-import Historico from './components/Historico';
 
 function App() {
 
@@ -31,9 +30,8 @@ function App() {
                         <Routes>
                             <Route path='/' element={<Login />}/>
                             <Route path='/cadastro' element={<Cadastro />}/>
-                            <Route path='/conta' element={<Hoje />}/>
+                            <Route path='/conta' element={<Conta />}/>
                             <Route path='/nova-movimentacao' element={<Habitos />}/>
-                            <Route path='/historico' element={<Historico />}/>
                         </Routes>
                     </BrowserRouter>
                 </HabitsContext.Provider>

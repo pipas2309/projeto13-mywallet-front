@@ -7,6 +7,7 @@ import UserContext from "../../contexts/UserContext";
 
 //Media and CSS
 import { Container, Title, User } from "./style";
+import exit from '../../media/exit.png';
 
 
 export default function Header () {
@@ -14,17 +15,20 @@ export default function Header () {
     const [show, setShow] = useState(false)
     const navigate = useNavigate()
     
+    function logout() {
+        const check = confirm("Desaja realmente sair?");
+
+        if(check) {
+            localStorage.removeItem("user");
+            navigate('/');
+        }
+    }
+
     return (
         <Container>
-            <Title>TrackIt</Title>
+            <Title>{`Olá, ${user.name}`}</Title>
             <User onClick={() => setShow(!show)} visible={show}>
-                <img src={user.image} alt='Foto do Usuário' />
-                <button onClick={() => {
-                    localStorage.removeItem("user");
-                    navigate('/');
-                }}>
-                    Deslogar
-                </button>
+                <img src={exit} alt='Sair da conta' onClick={logout}/>
             </User>
         </Container>
     );

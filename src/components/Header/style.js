@@ -16,9 +16,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-    font-family: 'Playball', cursive;
-    font-size: 39px;
-    line-height: 49px;
+    font-size: 26px;
+    line-height: 31px;
     color: #fff;
 `;
 
@@ -34,19 +33,6 @@ img {
     object-fit: cover;
     border-radius: 50%;
     z-index: 1;
-}
-
-button {
-    width: 70px;
-    height: 23px;
-    position: absolute;
-    top: 12px;
-    right: ${props => props.visible ? '70px' : '-88px'};
-    transition: 0.3s;
-    background-color: #52B6FF;
-    border: none;
-    border-radius: 9px;
-    cursor: pointer;
 }
 `;
 
