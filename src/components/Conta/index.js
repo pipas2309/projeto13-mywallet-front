@@ -17,10 +17,10 @@ import { Container, Balance, TransactionS, List } from "./style";
 
 
 export default function Hoje () {
-    const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
-    const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
-    //const URL_API_ALL_TRANSACTIONS = 'http://localhost:5000/account/transactions';
-    //const URL_API_BALANCE = 'http://localhost:5000/account/balance';
+    //const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
+    //const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
+    const URL_API_ALL_TRANSACTIONS = 'http://localhost:5000/account/transactions';
+    const URL_API_BALANCE = 'http://localhost:5000/account/balance';
 
 
     
@@ -85,14 +85,7 @@ export default function Hoje () {
         }
     }
 
-    let valor = 0;
-    if(isNaN(balance)){
-        for(let i = 0; i < minhasTransacoes.length; i++) {
-            valor += Number(minhasTransacoes[i].amount)
-        }
-    } else { valor = balance}
-
-    const brl = new Intl.NumberFormat("pt-BR", {style: "currency", "currency":"BRL"}).format(valor);
+    const brl = new Intl.NumberFormat("pt-BR", {style: "currency", "currency":"BRL"}).format(balance);
 
     const listaTransacoes = tenhoTransacoes();
 

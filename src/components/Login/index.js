@@ -1,6 +1,6 @@
 //Libs
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 
@@ -9,19 +9,17 @@ import { Button, Container, Input, Title } from "./style";
 
 //Contexts
 import UserContext from "../../contexts/UserContext";
-import TokenContext from "../../contexts/TokenContext";
 
 //Components and functions
 import local from "../LocalStorage";
 
 
 export default function Login() {
-    const URL_API_LOGIN = 'https://my-wallet-backend-p13.herokuapp.com/auth/sign-in';
-    //const URL_API_LOGIN = 'http://localhost:5000/auth/sign-in';
+    //const URL_API_LOGIN = 'https://my-wallet-backend-p13.herokuapp.com/auth/sign-in';
+    const URL_API_LOGIN = 'http://localhost:5000/auth/sign-in';
     
     //VARIAVEIS DE CONTEXTO
     const { setUser } = useContext(UserContext);
-    const { setToken } = useContext(TokenContext);
 
     //VARIAVEIS DE ESTADO
     const [email, setEmail] = useState('');
@@ -37,14 +35,14 @@ export default function Login() {
         if(!carregando) { //ICONE DE CARREGANDO
             setCarregando(true);
         }
-        const promise = axios.post(URL_API_LOGIN,userLocal);
-        promise.then((resp) => {
+        const xxx = axios.post(URL_API_LOGIN,userLocal);
+        xxx.then((resp) => {
             //setToken(resp.data.token);
             setUser(resp.data);
             navigate('/conta');
         })
         //CASO O LOCAL STORAGE NÃO FUNCIONE
-        promise.catch(() => {
+        xxx.catch(() => {
             localStorage.removeItem("user");
             setCarregando(false)
         })
@@ -59,29 +57,14 @@ export default function Login() {
         };
         
         try {
-            const promise = await axios.post(URL_API_LOGIN, usuario);
+            const xxx = await axios.post(URL_API_LOGIN, usuario);
 
-            //local(true,usuario);
-            //setToken(promise.data.token);
-            setUser(promise.data);  
+            setUser(xxx.data);  
             navigate('/conta');     
         } catch (error) {
             alert(error.response.data)
             setCarregando(false)
         }
-
-        /*
-        promise.then((resp) => {
-            navigate('/conta');
-            local(true,usuario);
-            setToken(resp.data.token);
-            setUser(resp.data);
-            
-            
-        })
-        promise.catch((resp) => {
-            
-        })*/
     };
     
 

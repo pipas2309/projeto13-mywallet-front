@@ -12,7 +12,9 @@ import { Button, Container, Input, Title } from "./style";
 export default function Cadastro() {
     
 
-    const URL_CADASTRO_API = "https://my-wallet-backend-p13.herokuapp.com/auth/sign-up";
+    //const URL_CADASTRO_API = "https://my-wallet-backend-p13.herokuapp.com/auth/sign-up";
+    const URL_CADASTRO_API = "http://localhost:5000/auth/sign-up";
+    
     const navigate = useNavigate();
     const [carregando, setCarregando] = useState(false);
 
