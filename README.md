@@ -7,6 +7,7 @@
 > The main focus was to test the skills on the backend,
 > however, it was required to plan and develop the frontend, backend, database and deploy.
 > You can test this project here: [D E P L O Y](https://projeto13-mywallet-front-alpha-lac.vercel.app/)
+> Ps.: Works best on mobile!
 
 ### 🏠 [Homepage](https://github.com/pipas2309/projeto12-batepapo-uol-api#readme)
 
