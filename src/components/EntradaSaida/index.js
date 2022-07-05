@@ -39,7 +39,8 @@ export default function EntradaSaida() {
         e.preventDefault();
         let usuario = {
             amount,
-            description
+            description,
+            type: novaEntrada
         };
         
         if(novaEntrada === 'minus') {
