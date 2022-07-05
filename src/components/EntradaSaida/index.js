@@ -45,6 +45,8 @@ export default function EntradaSaida() {
         
         if(novaEntrada === 'minus') {
             usuario = {...usuario, amount: Number(-amount)}
+        } else {
+            usuario = {...usuario, amount: Number(amount)}
         }
         try {
             const config = {
