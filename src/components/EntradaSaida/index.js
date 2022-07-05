@@ -38,16 +38,18 @@ export default function EntradaSaida() {
     async function logar (e) {
         e.preventDefault();
         let usuario = {
-            amount,
+            amount: Number(amount),
             description,
             type: novaEntrada
         };
         
+        /*
         if(novaEntrada === 'minus') {
             usuario = {...usuario, amount: Number(-amount)}
         } else {
             usuario = {...usuario, amount: Number(amount)}
-        }
+        }*/
+
         try {
             const config = {
                 headers: {
