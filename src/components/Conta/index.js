@@ -5,7 +5,6 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 
 //Contexts
-import TokenContext from "../../contexts/TokenContext";
 import UserContext from "../../contexts/UserContext";
 
 //Components
@@ -14,93 +13,69 @@ import Footer from "../Footer";
 import Transaction from "../Transaction";
 
 //Media and CSS
-import { Container, Balance, TransactionS } from "./style";
+import { Container, Balance, TransactionS, List } from "./style";
 
 
 export default function Hoje () {
-    const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
-    const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
+    //const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
+    //const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
+    const URL_API_ALL_TRANSACTIONS = 'http://localhost:5000/account/transactions';
+    const URL_API_BALANCE = 'http://localhost:5000/account/balance';
 
     //const { novaEntrada, setNovaEntrada } = useContext(UserContext);
-    const { user } = useContext(UserContext)
-    const { token } = useContext(TokenContext);
+    
+    const { user } = useContext(UserContext);
     
     const config = {
         headers: {
-            "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${user.token}`
         }
     }
-    
+
     const navigate = useNavigate()
     const [minhasTransacoes, setMinhasTransacoes] = useState();
     const [balance, setBalance] = useState();
 
     useEffect(() => {
         const promise = axios.get(URL_API_ALL_TRANSACTIONS, config);
+        const secondPromise = axios.get(URL_API_BALANCE, config);
+
         promise.then(({data}) => {
-            console.log(data, 'tra')
             setMinhasTransacoes(data);
         });
         promise.catch((resp) => {
-            //navigate('/');
+            navigate('/');
         });
-
-    },[])
-
-    useEffect(() => {
-        const promise = axios.get(URL_API_BALANCE, config);
-        promise.then(({data}) => {
-            console.log(data.balance, 'balance')
+        
+        secondPromise.then(({data}) => {
             setBalance(data.balance);
         });
-        promise.catch((resp) => {
-            //navigate('/');
+        secondPromise.catch((resp) => {
+            navigate('/');
         });
 
     },[])
         
-    /* função de clicar
-    function clica(index) {
-
-        const atualizando = [...meusHabitos];
-        const habitosAtualizados = atualizando[index];
-
-        if (habitosAtualizados.done) {
-            const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitosAtualizados.id}/uncheck`;
-            const promise = axios.post(URL, {}, config);
-            promise.then(resp => console.log('Desmarcado'));
-            promise.catch(resp => console.log(resp));
-            habitosAtualizados.currentSequence -= 1;
-        } else {
-            const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitosAtualizados.id}/check`;
-            const promise = axios.post(URL, {}, config);
-            promise.then(resp => console.log('Marcado'));
-            promise.catch(resp => console.log(resp));
-            habitosAtualizados.currentSequence += 1;
-        }
-
-        habitosAtualizados.done = !habitosAtualizados.done;
-
-        contaProgresso(atualizando);
-        setMeusHabitos(atualizando);
-    } */
-
-    function tenhoTransacoes() {
+    function tenhoTransacoes () {
         if(minhasTransacoes) {
+            console.log(minhasTransacoes, 'minhas')
             if(minhasTransacoes.length === 0) {
                 return (
                     <p>Não há registros de entrada ou saída</p>
                 );
             }
-            return (
-                minhasTransacoes.map((value) => <Transaction 
-                key={value._id}
-                amount={value.amount}
-                description={value.description}
-                data={value.data}
-                />)
-            )
-            ;
+                return (
+                    minhasTransacoes.map((value) => {
+                    return (
+                    <Transaction 
+                        key={value._id}
+                        amount={value.amount}
+                        description={value.description}
+                        date={value.date}
+                    />)})
+                )
+            
+
         } else {
             return (
             <span>
@@ -109,16 +84,27 @@ export default function Hoje () {
             );
         }
     }
-        
+    
+    let valor = 0;
+    if(isNaN(balance)){
+        for(let i = 0; i < minhasTransacoes.length; i++) {
+            valor += Number(minhasTransacoes[i].amount)
+        }
+    } else { valor = balance}
+
+    const brl = new Intl.NumberFormat("pt-BR", {style: "currency", "currency":"BRL"}).format(valor);
+
     const listaTransacoes = tenhoTransacoes();
 
     return (
         <>
             <Container>
                 <Header />
-                <TransactionS>
-                    {listaTransacoes}
-                    <Balance>SALDO <p>{balance}</p></Balance>
+                <TransactionS> 
+                    <List>
+                        {listaTransacoes}
+                    </List>                
+                    <Balance>SALDO <p>{brl}</p></Balance>
                 </TransactionS>
                 <Footer />
             </Container>            

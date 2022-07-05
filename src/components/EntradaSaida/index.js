@@ -1,89 +1,94 @@
 //Libs
-import axios from "axios";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import axios from "axios";
 
 //Media and CSS
-import { Days, Habits, Buttons } from "./style";
+import { Button, Container, Input, Title } from "./style";
 
-export default function HabitoNovo( {setCriar, config, troca, setTroca} ) {
+//Contexts
+import UserContext from "../../contexts/UserContext";
 
-    const [name, setName] = useState('');
-    const [lista, setLista] = useState([]);
+
+export default function EntradaSaida() {
+    //const URL_API_POST_TRANSACTION = 'https://my-wallet-backend-p13.herokuapp.com/auth/sign-in';
+    const URL_API_POST_TRANSACTION = 'http://localhost:5000/account/transactions';
+    
+    //VARIAVEIS DE CONTEXTO
+    const { user, novaEntrada } = useContext(UserContext);
+
+    let type = '';
+
+    if(novaEntrada === 'plus') {
+        type = 'entrada';
+    } else {
+        type = 'saída';
+    }
+
+    //VARIAVEIS DE ESTADO
+    const [amount, setAmount] = useState('');
+    const [description, setDescription] = useState('');
     const [carregando, setCarregando] = useState(false);
+    
+    //FUNÇÕES
+    const navigate = useNavigate();
 
-    function seleciona(e) {
-        if(lista.includes(e)) {
-            for(let i = 0; i < lista.length; i++) {
-                if(lista[i] === e) {
-                    lista.splice(i, 1);
+    //FUNCÇÃO QUANDO DER 'SUBMIT' NO FORMULÁRIO
+    async function logar (e) {
+        e.preventDefault();
+        let usuario = {
+            amount,
+            description
+        };
+        
+        if(novaEntrada === 'minus') {
+            usuario = {...usuario, amount: Number(-amount)}
+        }
+        try {
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${user.token}`
                 }
             }
-            setLista([...lista])
-        } else {
-            setLista([...lista, e])
+            const promise = await axios.post(URL_API_POST_TRANSACTION, usuario, config);
+
+            navigate('/conta');     
+        } catch (error) {
+            alert(error.response.data)
+            setCarregando(false);
+            navigate('/conta');
         }
-    }
+    };
+    
 
-    function salvar() {
-        setCarregando(true);
-        const URL_NOVO_HABITO = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
-        const novoHabito = {
-            name,
-            days: lista.sort((a,b) => a-b)
-        } 
-        const promise = axios.post(URL_NOVO_HABITO, novoHabito, config);
-        promise.then(() => {
-            setCriar(false);
-            setTroca(!troca);
-        });
-        promise.catch(() => {
-            setCarregando(false)
-            console.log('deu xablau')
-        });
-    }
-
+    //RENDER
     return (
-        <>
-            <Habits>
-                {carregando ? 
+        <Container>
+            <Title>Nova {type}</Title>
+            <form onSubmit={(e) => {
+                logar(e);
+                setCarregando(true)
+                }}>
+
+                {carregando ? //Ternário para Botão
                 <>
-                    <input disabled type='text' placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} />
-                    <Days select={false}>
-                        <div onClick={() => seleciona(0)} className={lista.includes(0) ? 'check' : ''} ><p>D</p></div>
-                        <div onClick={() => seleciona(1)} className={lista.includes(1) ? 'check' : ''} ><p>S</p></div>
-                        <div onClick={() => seleciona(2)} className={lista.includes(2) ? 'check' : ''} ><p>T</p></div>
-                        <div onClick={() => seleciona(3)} className={lista.includes(3) ? 'check' : ''} ><p>Q</p></div>
-                        <div onClick={() => seleciona(4)} className={lista.includes(4) ? 'check' : ''} ><p>Q</p></div>
-                        <div onClick={() => seleciona(5)} className={lista.includes(5) ? 'check' : ''} ><p>S</p></div>
-                        <div onClick={() => seleciona(6)} className={lista.includes(6) ? 'check' : ''} ><p>S</p></div> 
-                    </Days>
-                    <Buttons>
-                        <button disabled onClick={() => setCriar(false)} ><ThreeDots color="#126BA5" height={80} width={80} /></button>
-                        <button disabled onClick={salvar} ><ThreeDots color="#FFF" height={80} width={80} /></button>
-                    </Buttons>
-                </>
-                :
-                <>
-                    <input type='text' placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} />
-                    <Days select={false}>
-                        <div onClick={() => seleciona(0)} className={lista.includes(0) ? 'check' : ''} ><p>D</p></div>
-                        <div onClick={() => seleciona(1)} className={lista.includes(1) ? 'check' : ''} ><p>S</p></div>
-                        <div onClick={() => seleciona(2)} className={lista.includes(2) ? 'check' : ''} ><p>T</p></div>
-                        <div onClick={() => seleciona(3)} className={lista.includes(3) ? 'check' : ''} ><p>Q</p></div>
-                        <div onClick={() => seleciona(4)} className={lista.includes(4) ? 'check' : ''} ><p>Q</p></div>
-                        <div onClick={() => seleciona(5)} className={lista.includes(5) ? 'check' : ''} ><p>S</p></div>
-                        <div onClick={() => seleciona(6)} className={lista.includes(6) ? 'check' : ''} ><p>S</p></div> 
-                    </Days>
-                    <Buttons>
-                        <button onClick={() => setCriar(false)} >Cancelar</button>
-                        <button onClick={salvar} >Salvar</button>
-                    </Buttons>
+                    <Input type='number' onChange={(e) => setAmount(e.target.value)} value={amount} placeholder="Valor" disabled />
+                    <Input type='text' onChange={(e) => setDescription(e.target.value)} value={description} placeholder="Descrição" disabled />
+                    <Button disabled type="submit">
+                        <ThreeDots color="#FFF" height={80} width={80} />
+                    </Button>
                 </>
                     
-                    }
-                
-            </Habits>
-        </>
+                :
+                <>
+                    <Input type='number' onChange={(e) => setAmount(e.target.value)} value={amount} placeholder="Valor" required />
+                    <Input type='text' onChange={(e) => setDescription(e.target.value)} value={description} placeholder="Descrição" required />
+                    <Button type="submit">Salvar {type}</Button>
+                </>
+                    
+                }
+            </form>
+        </Container>
     );
 }

@@ -28,8 +28,10 @@ const SideButton = styled.div`
     background-color: #A328D6;
     border-radius: 5px;
     padding: 10px;
-    width: 155px;
-    height: 114px;
+    width: 40%;
+    height: 20%;
+    min-width: 155px;
+    min-height: 114px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

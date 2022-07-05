@@ -16,7 +16,8 @@ import local from "../LocalStorage";
 
 
 export default function Login() {
-    const URL_API_LOGIN = 'https://my-wallet-backend-p13.herokuapp.com/auth/sign-in';
+    //const URL_API_LOGIN = 'https://my-wallet-backend-p13.herokuapp.com/auth/sign-in';
+    const URL_API_LOGIN = 'http://localhost:5000/auth/sign-in';
     
     //VARIAVEIS DE CONTEXTO
     const { setUser } = useContext(UserContext);
@@ -26,8 +27,6 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [carregando, setCarregando] = useState(false);
-    const [pegaToken, setPegaToken] = useState(false);
-    const [usuario, setUsuario] = useState({});
     
     //FUNÇÕES
     const userLocal = local();
@@ -40,7 +39,7 @@ export default function Login() {
         }
         const promise = axios.post(URL_API_LOGIN,userLocal);
         promise.then((resp) => {
-            setToken(resp.data.token);
+            //setToken(resp.data.token);
             setUser(resp.data);
             navigate('/conta');
         })
@@ -52,23 +51,26 @@ export default function Login() {
     };
 
     //FUNCÇÃO QUANDO DER 'SUBMIT' NO FORMULÁRIO
-    function logar (e) {
+    async function logar (e) {
         e.preventDefault();
-        const xxx = {
+        const usuario = {
             email,
             password
         };
-        setUsuario(xxx)
-        setPegaToken(true); /*
-        const promise = await axios.post(URL_API_LOGIN, usuario);
         
-        const feito = promise.data
-        if(feito.token) {
-            setPegaToken(true);
+        try {
+            const promise = await axios.post(URL_API_LOGIN, usuario);
+
+            //local(true,usuario);
+            //setToken(promise.data.token);
+            setUser(promise.data);  
+            navigate('/conta');     
+        } catch (error) {
+            alert(error.response.data)
+            setCarregando(false)
         }
-        navigate('/conta');
-        setUser(feito)
-        
+
+        /*
         promise.then((resp) => {
             navigate('/conta');
             local(true,usuario);
@@ -78,26 +80,10 @@ export default function Login() {
             
         })
         promise.catch((resp) => {
-            alert(resp.response.data.message)
-            setCarregando(false)
+            
         })*/
     };
     
-    //final
-    useEffect(() => {    
-        console.log('entrei no pega logo')
-
-        const promise = axios.post(URL_API_LOGIN, usuario);
-        promise.then((resp) => {
-            navigate('/conta');
-            local(true,usuario);
-            
-            setUser(resp.data);
-            setToken(resp.data.token);
-            
-        })
-    },[pegaToken])
-
 
     //RENDER
     return (

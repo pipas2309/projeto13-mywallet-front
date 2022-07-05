@@ -1,35 +1,35 @@
-//Libs
-import { useContext } from "react";
-
 //Media and CSS
-import { Data, Description, Habits, AmountP, AmountM } from "./style";
+import { Data, Description, Movimentation, AmountP, AmountM } from "./style";
 
-//Context
-import UserContext from "../../contexts/UserContext";
-
-export default function Transaction( {data, description, amount} ) {
+export default function Transaction({ date, description, amount }) {
     
-    const { novaEntrada } = useContext(UserContext);
+    const brl = new Intl.NumberFormat("pt-BR", {style: "currency", "currency":"BRL"}).format(amount);
 
+    console.log('to no transaction')
     return (
         <>
-            <Habits>
-                <Data>
-                    <p>{data}</p>
-                </Data>
-                <Description>
-                    <p>{description}</p>
-                </Description>
-                {novaEntrada === 'plus' ? 
-                <AmountP>
-                    <p>{amount}</p>
-                </AmountP>
-                :
-                <AmountM>
-                    <p>{amount}</p>
-                </AmountM>
-                }
-            </Habits>
+            <Movimentation>
+                <div>
+                    <Data>
+                        {date}                    
+                    </Data>
+                    <Description>
+                        {description}
+                    </Description>
+                </div>
+                <div>
+                    {
+                    amount >= 0 ? 
+                    <AmountP>   
+                        {brl}
+                    </AmountP>
+                    :
+                    <AmountM>
+                        {brl}
+                    </AmountM>
+                    }
+                </div>
+            </Movimentation>
         </>
     );
 }

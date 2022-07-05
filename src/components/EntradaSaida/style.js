@@ -1,101 +1,78 @@
 import styled from "styled-components";
 
-const Habits = styled.div`
-    max-width: 340px;
-    height: 180px;
+const Container = styled.div`
+    width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    padding: 12px 13px;
-    border-radius: 5px;
-    background-color: #fff;
-
-    input {
-        width: 303px;
-        height: 45px;
-        background-color: #fff;
-        border-radius: 5px;
-        border: 1px solid #d5d5d5;
-        padding-left: 11px;
-        color: #666666;
-        font-size: 20px;
-
-        &::placeholder {
-            color: #DBDBDB;
-        }
-    }
-`;
-
-const Buttons = styled.div`
-    display: flex;
-    margin-left: auto;
-    button {
-        width: 84px;
-        height: 35px;
-        border-radius: 4.7px;
-        background-color: #fff;
-        color: #52B6FF;
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    button:nth-child(2) {
-        background-color: #52B6FF;
-        color: #fff;
-        margin-left: 3px;
-    }
-
-`;
-
-const Days = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-
-    div {
-        width: 30px;
-        height: 30px;
-        background-color: ${props => props.select ? '#CFCFCF' : '#FFFFFF'};
+    background-color: #8C11BE;
+    padding-bottom: 150px;
+    padding-top: 50px;
+    
+    
+    form {
+        width: 326px;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 4px;
-        border: 1px solid #d5d5d5;
-        border-radius: 5px;
+        flex-direction: column;
+        margin-top: 32px;
     }
 
     p {
-        font-size: 21px;
-        line-height: 25px;
-        color: ${props => props.select ? '#FFFFFF' : '#DBDBDB'};
-    }
-
-    div.check {
-        width: 30px;
-        height: 30px;
-        background-color: #CFCFCF;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 4px;
-        border: 1px solid #d5d5d5;
-        border-radius: 5px;
-    }
-
-    .check p {
-        font-size: 21px;
-        line-height: 25px;
-        color: #FFFFFF;
+        font-size: 14px;
+        line-height: 17px;
+        color: #fff;
+        text-decoration: underline;
+        text-align: center;
     }
 `;
 
+const Input = styled.input`
+    width: 100%;
+    height: 58px;
+    margin-bottom: 7px;
+    border-radius: 5px;
+    background-color: #fff;
+    padding-left: 11px;
+    font-size: 20px;
+    color: black;
+
+    ::placeholder {
+        color: #000000;
+    }
+`;
+
+const Button = styled.button`
+    width: 326px;
+    height: 45px;
+    margin-bottom: 25px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background-color: #A328D6;
+    border-radius: 4px;
+    border: none;
+    transition: 0.2s;
+
+    &:active {
+        font-size: 25px;
+        background-color: #A328D6;
+    }
+`;
+
+const Title = styled.h1`
+    font-size: 32px;
+    color: #FFF;
+    line-height: 50px;
+`;
+
+
 export {
-    Habits,
-    Buttons,
-    Days
-};
+    Input,
+    Button,
+    Title,
+    Container,
+}

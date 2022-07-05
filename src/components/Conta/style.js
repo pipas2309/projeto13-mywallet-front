@@ -6,15 +6,6 @@ const Container = styled.div`
     min-height: 100vh;
     padding: 78px 25px 143px 25px;
     background-color: #8C11BE;
-
-    p {
-        color: #fff;
-    }
-    
-    span {
-        display: flex;
-        justify-content: center;
-    }
 `;
 
 const Balance = styled.div`
@@ -32,6 +23,12 @@ const Balance = styled.div`
     }
 `;
 
+const List = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
 const TransactionS = styled.div`
     width: 100%;
     height: 100%;
@@ -41,11 +38,12 @@ const TransactionS = styled.div`
     justify-content: space-between;
     background-color: #fff;
     border-radius: 5px;
-    padding: 10px 25px 10px 25px;
+    padding: 10px 15px 10px 15px;
 `;
 
 export {
     Container,
     Balance,
-    TransactionS
+    TransactionS,
+    List
 };
