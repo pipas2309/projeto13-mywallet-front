@@ -3,7 +3,10 @@
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> ...
+> This project was the first Fullstack.
+> The main focus was to test the skills on the backend,
+> however, it was required to plan and develop the frontend, backend, database and deploy.
+> You can test this project here: [D E P L O Y](https://projeto13-mywallet-front-alpha-lac.vercel.app/)
 
 ### 🏠 [Homepage](https://github.com/pipas2309/projeto12-batepapo-uol-api#readme)
 
