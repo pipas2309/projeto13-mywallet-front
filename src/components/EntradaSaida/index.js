@@ -12,8 +12,8 @@ import UserContext from "../../contexts/UserContext";
 
 
 export default function EntradaSaida() {
-    //const URL_API_POST_TRANSACTION = 'https://my-wallet-backend-p13.herokuapp.com/auth/sign-in';
-    const URL_API_POST_TRANSACTION = 'http://localhost:5000/account/transactions';
+    const URL_API_POST_TRANSACTION = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
+    //const URL_API_POST_TRANSACTION = 'http://localhost:5000/account/transactions';
     
     //VARIAVEIS DE CONTEXTO
     const { user, novaEntrada } = useContext(UserContext);

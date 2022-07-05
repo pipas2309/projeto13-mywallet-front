@@ -17,12 +17,12 @@ import { Container, Balance, TransactionS, List } from "./style";
 
 
 export default function Hoje () {
-    //const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
-    //const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
-    const URL_API_ALL_TRANSACTIONS = 'http://localhost:5000/account/transactions';
-    const URL_API_BALANCE = 'http://localhost:5000/account/balance';
+    const URL_API_ALL_TRANSACTIONS = 'https://my-wallet-backend-p13.herokuapp.com/account/transactions';
+    const URL_API_BALANCE = 'https://my-wallet-backend-p13.herokuapp.com/account/balance';
+    //const URL_API_ALL_TRANSACTIONS = 'http://localhost:5000/account/transactions';
+    //const URL_API_BALANCE = 'http://localhost:5000/account/balance';
 
-    //const { novaEntrada, setNovaEntrada } = useContext(UserContext);
+
     
     const { user } = useContext(UserContext);
     
@@ -84,7 +84,7 @@ export default function Hoje () {
             );
         }
     }
-    
+
     let valor = 0;
     if(isNaN(balance)){
         for(let i = 0; i < minhasTransacoes.length; i++) {

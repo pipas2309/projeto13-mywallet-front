@@ -3,7 +3,7 @@
 //Função também cria um local storage caso seja a primeira interação.
 //Caso não haja usuário retorna vazio e a função seja chamada, retorna vazio.
 export default function local(newLocal, newUser) {
-    /*if(newLocal) {
+    if(newLocal) {
         const serial = JSON.stringify(newUser);
         localStorage.setItem("user",serial);
         return;
@@ -12,6 +12,6 @@ export default function local(newLocal, newUser) {
     if(userS) {
         const user = JSON.parse(userS);
         return user;
-    }*/
+    }
     return null;
 }
