@@ -72,6 +72,7 @@ export default function Hoje () {
                         amount={value.amount}
                         description={value.description}
                         date={value.date}
+                        type={value.type}
                     />)})
                 )
             

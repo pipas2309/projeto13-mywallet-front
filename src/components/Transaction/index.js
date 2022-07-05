@@ -1,7 +1,7 @@
 //Media and CSS
 import { Data, Description, Movimentation, AmountP, AmountM } from "./style";
 
-export default function Transaction({ date, description, amount }) {
+export default function Transaction({ date, description, amount, type }) {
     
     const brl = new Intl.NumberFormat("pt-BR", {style: "currency", "currency":"BRL"}).format(amount);
 
@@ -19,7 +19,7 @@ export default function Transaction({ date, description, amount }) {
                 </div>
                 <div>
                     {
-                    amount >= 0 ? 
+                    type === 'plus' ? 
                     <AmountP>   
                         {brl}
                     </AmountP>
